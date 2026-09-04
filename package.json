@@ -1,0 +1,29 @@
+{
+  "name": "ak-crackers-full-connected-2026",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"node server/server.js\" \"npm --prefix client run dev\"",
+    "server": "node server/server.js",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "concurrently": "^9.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "nodemailer": "^10.0.0",
+    "pdfkit": "^0.17.2",
+    "razorpay": "^2.9.6",
+    "uuid": "^11.0.5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

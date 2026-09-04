@@ -1,0 +1,20 @@
+ADMIN LOGIN FIX
+===============
+
+Use a fresh folder and run:
+  npm install
+  npm --prefix client install
+  npm run dev
+
+Backend check:
+  http://localhost:4000/api/health
+  http://localhost:4000/api/admin-login-check
+
+Frontend:
+  http://localhost:5173
+
+Admin credentials must be set explicitly in `.env` with `ADMIN_EMAIL` and
+`ADMIN_PASSWORD`. Production startup rejects missing or default credentials.
+
+This version uses http://localhost:4000/api directly during Vite development,
+and falls back to the same backend if a proxy route returns 404.

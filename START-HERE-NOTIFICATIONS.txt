@@ -1,0 +1,22 @@
+AK CRACKERS — EMAIL + BILL NOTIFICATIONS
+
+This build automatically sends the generated PDF bill to BOTH the customer and admin email when an order becomes Confirmed. It also supports WhatsApp when Meta Cloud API credentials are configured.
+
+EMAIL SETUP
+1. Copy .env.example to .env in the project root.
+2. Fill SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS, SMTP_FROM, and ADMIN_NOTIFICATION_EMAIL.
+3. Start with: npm run dev
+4. Admin -> Notifications -> Send Test Email.
+
+AUTOMATIC EMAIL EVENTS
+- Razorpay payment verified -> customer + admin bill email
+- Order confirmed -> customer + admin bill email
+- Admin changes Pending -> Confirmed -> customer + admin bill email (unless already notified)
+
+The email contains a PDF attachment named <ORDER_ID>-bill.pdf.
+
+GMAIL
+Use a Google App Password (or another supported Gmail authentication method). Do not place secrets in client/frontend files.
+
+WHATSAPP
+Optional. Set WHATSAPP_PHONE_NUMBER_ID and WHATSAPP_ACCESS_TOKEN in .env when Meta setup is available.

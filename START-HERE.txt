@@ -1,0 +1,19 @@
+AK CRACKERS - START HERE
+
+1. Open PowerShell in this folder.
+2. Run: npm install
+3. Run: npm run dev
+4. Open: http://localhost:5173
+5. Backend check: http://localhost:4000/api/health
+6. Product check: http://localhost:4000/api/products
+
+IMPORTANT: If you used an older AK Crackers build in this same folder, this version
+automatically reconciles server/data.json with the 125-product 2026 catalogue.
+It preserves uploaded photos and existing stock for matching product codes.
+
+Admin (separate login):
+Set `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `.env` before signing in.
+Open the storefront and click 'Admin Login'.
+
+Stock starts at 0 because the supplied PDF did not contain inventory quantities.
+Use Admin > Inventory to enter actual stock.

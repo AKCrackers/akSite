@@ -1,0 +1,1127 @@
+[
+  {
+    "code": "1",
+    "name": "4\" GOLD LAKSHMI",
+    "category": "Crackers",
+    "price": 35,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "2",
+    "name": "2 3/4\" KURUVI",
+    "category": "Crackers",
+    "price": 9,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "3",
+    "name": "3 1/2 LAKSHMI CRACKERS",
+    "category": "Crackers",
+    "price": 15,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "4",
+    "name": "4\" LAKSHMI CRACKERS",
+    "category": "Crackers",
+    "price": 25,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "5",
+    "name": "5\" JALLIKATTU",
+    "category": "Crackers",
+    "price": 65,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "6",
+    "name": "6\" AVENGERS",
+    "category": "Crackers",
+    "price": 70,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "7",
+    "name": "TWO SOUND CRACKERS",
+    "category": "Crackers",
+    "price": 42,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "8",
+    "name": "RED BIJILI",
+    "category": "Bijili",
+    "price": 36,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bijili.svg"
+  },
+  {
+    "code": "9",
+    "name": "STRIPED BIJILI",
+    "category": "Bijili",
+    "price": 40,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bijili.svg"
+  },
+  {
+    "code": "10",
+    "name": "28 GIANT",
+    "category": "Crackers",
+    "price": 28,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "11",
+    "name": "56 GIANT",
+    "category": "Crackers",
+    "price": 58,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/crackers.svg"
+  },
+  {
+    "code": "12",
+    "name": "VARMA 0.1",
+    "category": "Fancy Items",
+    "price": 45,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "13",
+    "name": "VARMA 1",
+    "category": "Fancy Items",
+    "price": 280,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "14",
+    "name": "VARMA 2",
+    "category": "Fancy Items",
+    "price": 560,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "15",
+    "name": "VARMA 5",
+    "category": "Fancy Items",
+    "price": 1350,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "16",
+    "name": "VARMA 10",
+    "category": "Fancy Items",
+    "price": 2650,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "17",
+    "name": "FLOWER POT BASIC BIG",
+    "category": "Flower Pots",
+    "price": 72,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/flower-pots.svg"
+  },
+  {
+    "code": "18",
+    "name": "FLOWER POT SPECIAL",
+    "category": "Flower Pots",
+    "price": 95,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/flower-pots.svg"
+  },
+  {
+    "code": "19",
+    "name": "FLOWER POT ASHOKA",
+    "category": "Flower Pots",
+    "price": 145,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/flower-pots.svg"
+  },
+  {
+    "code": "20",
+    "name": "FLOWER POT COLOUR KOTI",
+    "category": "Flower Pots",
+    "price": 240,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/flower-pots.svg"
+  },
+  {
+    "code": "21",
+    "name": "FLOWER POT COLOUR KOTI DELUXE",
+    "category": "Flower Pots",
+    "price": 380,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/flower-pots.svg"
+  },
+  {
+    "code": "22",
+    "name": "TRICOLOUR",
+    "category": "Flower Pots",
+    "price": 320,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/flower-pots.svg"
+  },
+  {
+    "code": "23",
+    "name": "GROUND CHAKKAR BASIC BIG",
+    "category": "Ground Chakkars",
+    "price": 50,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/ground-chakkars.svg"
+  },
+  {
+    "code": "24",
+    "name": "GROUND CHAKKAR SPECIAL",
+    "category": "Ground Chakkars",
+    "price": 86,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/ground-chakkars.svg"
+  },
+  {
+    "code": "25",
+    "name": "GROUND CHAKKAR DELUXE",
+    "category": "Ground Chakkars",
+    "price": 160,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/ground-chakkars.svg"
+  },
+  {
+    "code": "26",
+    "name": "GROUND CHAKKAR SPINNER",
+    "category": "Ground Chakkars",
+    "price": 180,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/ground-chakkars.svg"
+  },
+  {
+    "code": "27",
+    "name": "GROUND CHAKKAR SPINNER DELUXE",
+    "category": "Ground Chakkars",
+    "price": 220,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/ground-chakkars.svg"
+  },
+  {
+    "code": "28",
+    "name": "WIRE CHAKKARAM",
+    "category": "Ground Chakkars",
+    "price": 190,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/ground-chakkars.svg"
+  },
+  {
+    "code": "29",
+    "name": "1 1/2\" TWINKLING STAR",
+    "category": "Sparklers",
+    "price": 25,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "30",
+    "name": "4\" TWINKLING STAR",
+    "category": "Sparklers",
+    "price": 68,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "31",
+    "name": "ROCKET BOMB",
+    "category": "Rockets",
+    "price": 65,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/rockets.svg"
+  },
+  {
+    "code": "32",
+    "name": "LUNIK ROCKET",
+    "category": "Rockets",
+    "price": 120,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/rockets.svg"
+  },
+  {
+    "code": "33",
+    "name": "2 SOUND OR 3 SOUND ROCKET",
+    "category": "Rockets",
+    "price": 130,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/rockets.svg"
+  },
+  {
+    "code": "34",
+    "name": "BULLET BOMB",
+    "category": "Bombs",
+    "price": 30,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bombs.svg"
+  },
+  {
+    "code": "35",
+    "name": "HYDRO BOOMB",
+    "category": "Bombs",
+    "price": 85,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bombs.svg"
+  },
+  {
+    "code": "36",
+    "name": "CLASSIC BOMB",
+    "category": "Bombs",
+    "price": 130,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bombs.svg"
+  },
+  {
+    "code": "37",
+    "name": "AGNI BOMB",
+    "category": "Bombs",
+    "price": 140,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bombs.svg"
+  },
+  {
+    "code": "38",
+    "name": "DIGITAL BOMB",
+    "category": "Bombs",
+    "price": 280,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bombs.svg"
+  },
+  {
+    "code": "39",
+    "name": "1/4KG PAPER BOMB",
+    "category": "Bombs",
+    "price": 60,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bombs.svg"
+  },
+  {
+    "code": "40",
+    "name": "1/2KG PAPER BOMB",
+    "category": "Bombs",
+    "price": 120,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bombs.svg"
+  },
+  {
+    "code": "41",
+    "name": "1KG PAPER BOMB",
+    "category": "Bombs",
+    "price": 190,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/bombs.svg"
+  },
+  {
+    "code": "42",
+    "name": "MONEY BANK (2PCS)",
+    "category": "Fancy Items",
+    "price": 220,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "43",
+    "name": "MINI SIREN (5PCS)",
+    "category": "Sound Items",
+    "price": 175,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sound-items.svg"
+  },
+  {
+    "code": "44",
+    "name": "MEGA SIREN (2PCS)",
+    "category": "Sound Items",
+    "price": 190,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sound-items.svg"
+  },
+  {
+    "code": "45",
+    "name": "3 WAY PEACOCK",
+    "category": "Fancy Items",
+    "price": 175,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "46",
+    "name": "BADA PEACOCK",
+    "category": "Fancy Items",
+    "price": 460,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "47",
+    "name": "SUN DROP",
+    "category": "Fancy Items",
+    "price": 110,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "48",
+    "name": "MOON DROP",
+    "category": "Fancy Items",
+    "price": 110,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "49",
+    "name": "RED SUN",
+    "category": "Fancy Items",
+    "price": 210,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "50",
+    "name": "BLUE EYES",
+    "category": "Fancy Items",
+    "price": 210,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "51",
+    "name": "POWER POT",
+    "category": "Flower Pots",
+    "price": 225,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/flower-pots.svg"
+  },
+  {
+    "code": "52",
+    "name": "ANGRY BIRD",
+    "category": "Fancy Items",
+    "price": 105,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "53",
+    "name": "JOLLY RANGE",
+    "category": "Fancy Items",
+    "price": 38,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "54",
+    "name": "COCKTAIL TIN (2 PCS)",
+    "category": "Fancy Items",
+    "price": 210,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "55",
+    "name": "ELEPHANT",
+    "category": "Fancy Items",
+    "price": 220,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "56",
+    "name": "LION KING",
+    "category": "Fancy Items",
+    "price": 200,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "57",
+    "name": "SODA FOUNTAIN",
+    "category": "Fountains",
+    "price": 420,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fountains.svg"
+  },
+  {
+    "code": "58",
+    "name": "DANCING BUTTERFLY",
+    "category": "Fancy Items",
+    "price": 120,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "59",
+    "name": "HELICOPTER",
+    "category": "Fancy Items",
+    "price": 120,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "60",
+    "name": "BAMBARAM",
+    "category": "Fancy Items",
+    "price": 125,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "61",
+    "name": "DRONE",
+    "category": "Fancy Items",
+    "price": 180,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "62",
+    "name": "SELFIE STICK",
+    "category": "Fancy Items",
+    "price": 140,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "63",
+    "name": "PHOTO FLASH",
+    "category": "Fancy Items",
+    "price": 85,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "64",
+    "name": "4X4 WHEEL",
+    "category": "Ground Chakkars",
+    "price": 210,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/ground-chakkars.svg"
+  },
+  {
+    "code": "65",
+    "name": "CRACKLING FOUNTAIN",
+    "category": "Fountains",
+    "price": 380,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fountains.svg"
+  },
+  {
+    "code": "66",
+    "name": "FISH FOUNTAIN",
+    "category": "Fountains",
+    "price": 180,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fountains.svg"
+  },
+  {
+    "code": "67",
+    "name": "SWORD",
+    "category": "Fancy Items",
+    "price": 170,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "68",
+    "name": "PUBG GUN",
+    "category": "Fancy Items",
+    "price": 185,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "69",
+    "name": "ROTATING SPARKLERS",
+    "category": "Sparklers",
+    "price": 270,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "70",
+    "name": "MOYE MOYE",
+    "category": "Fancy Items",
+    "price": 220,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "71",
+    "name": "SKY DIVE (3 PCS)",
+    "category": "Fancy Items",
+    "price": 210,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "72",
+    "name": "LOLLIPOP",
+    "category": "Fancy Items",
+    "price": 170,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "73",
+    "name": "BAT&BALL",
+    "category": "Fancy Items",
+    "price": 270,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "74",
+    "name": "COLOURFUL SMOKE",
+    "category": "Smoke Items",
+    "price": 180,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/smoke-items.svg"
+  },
+  {
+    "code": "75",
+    "name": "10 IN 1 FLASH",
+    "category": "Fancy Items",
+    "price": 80,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "76",
+    "name": "LAPTOP MATCHES",
+    "category": "Fancy Items",
+    "price": 190,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "77",
+    "name": "7UP SHOT",
+    "category": "Shots",
+    "price": 110,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/shots.svg"
+  },
+  {
+    "code": "78",
+    "name": "12 SHOT RIDER",
+    "category": "Shots",
+    "price": 170,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/shots.svg"
+  },
+  {
+    "code": "79",
+    "name": "CHOTTA FANCY SINGLE",
+    "category": "Fancy Items",
+    "price": 60,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "80",
+    "name": "2\" SINGLE",
+    "category": "Fancy Items",
+    "price": 120,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "81",
+    "name": "2 1/2\" (3PCS)",
+    "category": "Fancy Items",
+    "price": 320,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "82",
+    "name": "3 1/2\" SINGLE",
+    "category": "Fancy Items",
+    "price": 330,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "83",
+    "name": "3 1/2\" (2PCS)",
+    "category": "Fancy Items",
+    "price": 620,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "84",
+    "name": "4\" SINGLE",
+    "category": "Fancy Items",
+    "price": 380,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "85",
+    "name": "5\" HD SERIES (2PCS)",
+    "category": "Fancy Items",
+    "price": 1000,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "86",
+    "name": "6\" TRAIN SERIES (2PCS)",
+    "category": "Fancy Items",
+    "price": 1200,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "87",
+    "name": "6\" BOOM SERIES (2PCS)",
+    "category": "Fancy Items",
+    "price": 1500,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "88",
+    "name": "DOUBLE BALL",
+    "category": "Fancy Items",
+    "price": 590,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "89",
+    "name": "12 STEP 3D",
+    "category": "Fancy Items",
+    "price": 450,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "90",
+    "name": "NAYAGARA FALLS",
+    "category": "Fancy Items",
+    "price": 420,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/fancy-items.svg"
+  },
+  {
+    "code": "91",
+    "name": "30 SHOT MULTICOLOR",
+    "category": "Shots",
+    "price": 410,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/shots.svg"
+  },
+  {
+    "code": "92",
+    "name": "30 SHOT MULTICOLOR WITH CRACKLING",
+    "category": "Shots",
+    "price": 450,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/shots.svg"
+  },
+  {
+    "code": "93",
+    "name": "60 SHOT MULTICOLOR WITH CRACKLING",
+    "category": "Shots",
+    "price": 860,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/shots.svg"
+  },
+  {
+    "code": "94",
+    "name": "120 SHOT MULTICOLOR WITH CRACKLING",
+    "category": "Shots",
+    "price": 1700,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/shots.svg"
+  },
+  {
+    "code": "95",
+    "name": "240 SHOT MULTICOLOR WITH CRACKLING",
+    "category": "Shots",
+    "price": 3450,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/shots.svg"
+  },
+  {
+    "code": "96",
+    "name": "SNAKE TABLET BIG",
+    "category": "Old Is Gold",
+    "price": 45,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/old-is-gold.svg"
+  },
+  {
+    "code": "97",
+    "name": "ELECTRIC STONE",
+    "category": "Old Is Gold",
+    "price": 20,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/old-is-gold.svg"
+  },
+  {
+    "code": "98",
+    "name": "RING GUN (SONY)",
+    "category": "Old Is Gold",
+    "price": 120,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/old-is-gold.svg"
+  },
+  {
+    "code": "99",
+    "name": "RING CAP (9PCS)",
+    "category": "Old Is Gold",
+    "price": 30,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/old-is-gold.svg"
+  },
+  {
+    "code": "100",
+    "name": "KITKAT",
+    "category": "Old Is Gold",
+    "price": 35,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/old-is-gold.svg"
+  },
+  {
+    "code": "101",
+    "name": "CARTOON",
+    "category": "Old Is Gold",
+    "price": 20,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/old-is-gold.svg"
+  },
+  {
+    "code": "102",
+    "name": "12CM ELECTRIC SPARKLERS",
+    "category": "Sparklers",
+    "price": 29,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "103",
+    "name": "12CM COLOUR SPARKLERS",
+    "category": "Sparklers",
+    "price": 32,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "104",
+    "name": "12CM GREEN SPARKLERS",
+    "category": "Sparklers",
+    "price": 35,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "105",
+    "name": "12CM RED SPARKLERS",
+    "category": "Sparklers",
+    "price": 38,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "106",
+    "name": "15CM ELECTRIC SPARKLERS",
+    "category": "Sparklers",
+    "price": 40,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "107",
+    "name": "15CM COLOUR SPARKLERS",
+    "category": "Sparklers",
+    "price": 42,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "108",
+    "name": "15CM GREEN SPARKLERS",
+    "category": "Sparklers",
+    "price": 45,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "109",
+    "name": "15CM RED SPARKLERS",
+    "category": "Sparklers",
+    "price": 49,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "110",
+    "name": "30CM ELECTRIC SPARKLERS",
+    "category": "Sparklers",
+    "price": 40,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "111",
+    "name": "30CM COLOUR SPARKLERS",
+    "category": "Sparklers",
+    "price": 42,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "112",
+    "name": "30CM GREEN SPARKLERS",
+    "category": "Sparklers",
+    "price": 45,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "113",
+    "name": "30CM RED SPARKLERS",
+    "category": "Sparklers",
+    "price": 49,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "114",
+    "name": "50CM ELECTRIC SPARKLERS",
+    "category": "Sparklers",
+    "price": 180,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "115",
+    "name": "50CM COLOUR SPARKLERS",
+    "category": "Sparklers",
+    "price": 195,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/sparklers.svg"
+  },
+  {
+    "code": "116",
+    "name": "10X10 CELEBRATION MOMENTS (MULTICOLOR)",
+    "category": "Grand Finale Shots",
+    "price": 3700,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/grand-finale-shots.svg"
+  },
+  {
+    "code": "117",
+    "name": "10X10 MASTER PIECE (CRACKLING)",
+    "category": "Grand Finale Shots",
+    "price": 3900,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/grand-finale-shots.svg"
+  },
+  {
+    "code": "G1",
+    "name": "CINDRELLA (24 ITEM)",
+    "category": "Gift Box",
+    "price": 380,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/gift-box.svg"
+  },
+  {
+    "code": "G2",
+    "name": "HOLI (33 ITEM)",
+    "category": "Gift Box",
+    "price": 600,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/gift-box.svg"
+  },
+  {
+    "code": "G3",
+    "name": "FESTIVAL FEAST (42 ITEM)",
+    "category": "Gift Box",
+    "price": 850,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/gift-box.svg"
+  },
+  {
+    "code": "G4",
+    "name": "LORD MURUGAN (51 ITEM)",
+    "category": "Gift Box",
+    "price": 1200,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/gift-box.svg"
+  },
+  {
+    "code": "C1",
+    "name": "KIDS COMBO PACK",
+    "category": "Combo Pack",
+    "price": 3500,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/combo-pack.svg"
+  },
+  {
+    "code": "C2",
+    "name": "BUDGET COMBO PACK",
+    "category": "Combo Pack",
+    "price": 5000,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/combo-pack.svg"
+  },
+  {
+    "code": "C3",
+    "name": "FAMILY COMBO PACK",
+    "category": "Combo Pack",
+    "price": 7500,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/combo-pack.svg"
+  },
+  {
+    "code": "C4",
+    "name": "VIP COMBO PACK",
+    "category": "Combo Pack",
+    "price": 10000,
+    "active": true,
+    "stock": 0,
+    "image": "/images/categories/combo-pack.svg"
+  }
+]
