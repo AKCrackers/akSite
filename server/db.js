@@ -1,7 +1,19 @@
 import bcrypt from 'bcryptjs';
 import fs from 'fs';
+import { MongoClient } from 'mongodb';
 import { v4 as uuid } from 'uuid';
-import { ADMIN_EMAIL, ADMIN_NAME, ADMIN_PASSWORD, CATALOGUE, DB } from './config.js';
+import { ADMIN_EMAIL, ADMIN_NAME, ADMIN_PASSWORD, CATALOGUE, MONGODB_TLS_ALLOW_INVALID_CERTIFICATES, MONGODB_URI } from './config.js';
+
+// The whole app used to store one big JSON object on disk. To avoid touching
+// every route/order/notification file, we keep that same one-object shape,
+// but it now lives as a single document in MongoDB instead of a local file.
+const DOC_ID = 'main';
+const COLLECTION_NAME = 'store';
+
+let client;
+let collection;
+let cache = null;
+let persistQueue = Promise.resolve();
 
 export function categoryImage(category) {
   return `/images/categories/${String(category).toLowerCase().replace(/[^a-z0-9]+/g, '-')}.svg`;
@@ -48,16 +60,6 @@ function ensureAdminAccount(data) {
   return changed;
 }
 
-export function writeDB(data) {
-  const temp = `${DB}.${process.pid}.${uuid()}.tmp`;
-  try {
-    fs.writeFileSync(temp, JSON.stringify(data, null, 2), { mode: 0o600 });
-    fs.renameSync(temp, DB);
-  } finally {
-    if (fs.existsSync(temp)) fs.unlinkSync(temp);
-  }
-}
-
 function reconcileCatalogue(data) {
   const seed = seedProducts();
   const existing = Array.isArray(data.products) ? data.products : [];
@@ -82,27 +84,56 @@ function reconcileCatalogue(data) {
   const changed = existing.length !== merged.length || seed.some(product => !existing.some(old => String(old.code).toLowerCase() === product.code.toLowerCase()));
   if (changed) {
     data.products = merged;
-    writeDB(data);
     console.log(`Catalogue reconciled: ${existing.length} -> ${merged.length} products.`);
   }
+  return changed;
 }
 
-function ensureDB() {
-  if (!fs.existsSync(DB)) {
-    writeDB(initialDB());
-    return;
-  }
-  try {
-    const data = JSON.parse(fs.readFileSync(DB, 'utf8'));
-    reconcileCatalogue(data);
-  } catch (error) {
-    console.error('Catalogue reconciliation failed:', error.message);
-  }
+async function persistSnapshot(data) {
+  if (!collection || !data) return;
+  const { _id, ...rest } = data;
+  await collection.replaceOne({ _id: DOC_ID }, { _id: DOC_ID, ...rest }, { upsert: true });
 }
 
+async function persist() {
+  await persistSnapshot(cache);
+}
+
+// Call this once at server startup, before app.listen().
+export async function connectDB() {
+  client = new MongoClient(MONGODB_URI, { serverSelectionTimeoutMS: 10000, tlsAllowInvalidCertificates: MONGODB_TLS_ALLOW_INVALID_CERTIFICATES });
+  await client.connect();
+  const db = client.db(); // uses the database name embedded in MONGODB_URI
+  collection = db.collection(COLLECTION_NAME);
+
+  const doc = await collection.findOne({ _id: DOC_ID });
+  if (!doc) {
+    cache = initialDB();
+    await persist();
+    console.log('MongoDB: initialized new store document.');
+  } else {
+    const { _id, ...data } = doc;
+    cache = data;
+    const catalogueChanged = reconcileCatalogue(cache);
+    const adminChanged = ensureAdminAccount(cache);
+    if (catalogueChanged || adminChanged) await persist();
+  }
+  console.log('Connected to MongoDB Atlas.');
+}
+
+// Same signature/behavior as before: synchronous read of the current data.
 export function readDB() {
-  ensureDB();
-  const data = JSON.parse(fs.readFileSync(DB, 'utf8'));
-  if (ensureAdminAccount(data)) writeDB(data);
-  return data;
+  if (!cache) throw new Error('Database not initialized. Call connectDB() before handling requests.');
+  return cache;
+}
+
+// Same signature as before: update in-memory immediately (so subsequent
+// readDB() calls in the same request cycle see the change right away),
+// then persist to MongoDB in the background.
+export function writeDB(data) {
+  cache = data;
+  const snapshot = JSON.parse(JSON.stringify(data));
+  persistQueue = persistQueue
+    .then(() => persistSnapshot(snapshot))
+    .catch(error => console.error('MongoDB persist failed:', error.message));
 }

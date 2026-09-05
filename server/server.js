@@ -7,8 +7,8 @@ import fs from 'fs';
 import path from 'path';
 import { v4 as uuid } from 'uuid';
 import { buildInvoicePdf, sendOrderNotifications, getNotificationConfig, testEmailConfiguration } from './notifications.js';
-import { ALLOWED_ORIGINS, DB, DEMO_PAYMENT, IS_PRODUCTION, PORT, ROOT, RESERVATION_MINUTES, UPLOADS } from './config.js';
-import { categoryImage, readDB, writeDB } from './db.js';
+import { ALLOWED_ORIGINS, DEMO_PAYMENT, IS_PRODUCTION, PORT, ROOT, RESERVATION_MINUTES, UPLOADS } from './config.js';
+import { categoryImage, connectDB, readDB, writeDB } from './db.js';
 import { adminOnly, auth, publicUser, rateLimit, tokenFor } from './security.js';
 import { cleanAddress, validEmail, validPhone, validPin, validateAddress } from './validation.js';
 import { imageUpload, removeLocalUpload, validImageFile } from './uploads.js';
@@ -20,6 +20,7 @@ console.log(`[notifications] Email ${notificationEnvStatus.email.configured ? 'c
 
 const app = express();
 app.disable('x-powered-by');
+if (IS_PRODUCTION) app.set('trust proxy', 1);
 app.use(cors({ origin: (origin, callback) => callback(null, !origin || ALLOWED_ORIGINS.includes(origin)), credentials: false }));
 app.use((_req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -282,6 +283,7 @@ app.post('/api/admin/notifications/test-email', auth, adminOnly, async (req, res
 });
 
 app.get('/api/admin/orders', auth, adminOnly, (_req, res) => { cleanupExpiredOrders(); res.json(readDB().orders); });
+
 app.put('/api/admin/orders/:id', auth, adminOnly, (req, res) => {
   const allowedStatus = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
   const allowedPayment = ['Pending', 'Paid', 'Failed', 'Refunded'];
@@ -309,6 +311,7 @@ app.put('/api/admin/orders/:id', auth, adminOnly, (req, res) => {
 });
 app.get('/api/admin/customers', auth, adminOnly, (_req, res) => res.json(readDB().users.filter(u => u.role === 'customer').map(publicUser)));
 app.get('/api/admin/payments', auth, adminOnly, (_req, res) => res.json(readDB().payments));
+app.use('/api', (_req, res) => res.status(404).json({ error: 'API route not found.' }));
 
 const clientDist = path.join(ROOT, 'client', 'dist');
 if (process.env.NODE_ENV === 'production' && fs.existsSync(clientDist)) {
@@ -316,11 +319,19 @@ if (process.env.NODE_ENV === 'production' && fs.existsSync(clientDist)) {
   app.get('/{*splat}', (_req, res) => res.sendFile(path.join(clientDist, 'index.html')));
 }
 
-setInterval(() => { try { cleanupExpiredOrders(); } catch (e) { console.error('cleanup error', e.message); } }, 5 * 60 * 1000).unref();
-
 app.use((err, _req, res, _next) => { console.error(err); res.status(500).json({ error: 'Unexpected server error.' }); });
-app.listen(PORT, () => {
-  console.log(`AK Crackers server running on http://localhost:${PORT}`);
-  const n = getNotificationConfig();
-  console.log(`Notifications: email=${n.email.configured ? 'configured' : 'not configured'}${n.email.missing.length ? ` (missing: ${n.email.missing.join(', ')})` : ''}; WhatsApp=${n.whatsapp.configured ? 'configured' : 'not configured'}${n.whatsapp.missing.length ? ` (missing: ${n.whatsapp.missing.join(', ')})` : ''}`);
+
+async function start() {
+  await connectDB();
+  setInterval(() => { try { cleanupExpiredOrders(); } catch (e) { console.error('cleanup error', e.message); } }, 5 * 60 * 1000).unref();
+  app.listen(PORT, () => {
+    console.log(`AK Crackers server running on http://localhost:${PORT}`);
+    const n = getNotificationConfig();
+    console.log(`Notifications: email=${n.email.configured ? 'configured' : 'not configured'}${n.email.missing.length ? ` (missing: ${n.email.missing.join(', ')})` : ''}; WhatsApp=${n.whatsapp.configured ? 'configured' : 'not configured'}${n.whatsapp.missing.length ? ` (missing: ${n.whatsapp.missing.join(', ')})` : ''}`);
+  });
+}
+
+start().catch(error => {
+  console.error('Failed to start server:', error.message);
+  process.exit(1);
 });

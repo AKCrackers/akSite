@@ -13,8 +13,12 @@ export const imageUpload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024, files: 125 },
   fileFilter: (_request, file, callback) => {
-    const valid = ['image/jpeg', 'image/png', 'image/webp'].includes(file.mimetype);
-    callback(valid ? null : new Error('Only JPG, PNG and WebP images are allowed'));
+    const extension = path.extname(file.originalname).toLowerCase();
+    const validMime = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.mimetype);
+    const validExtension = ['.jpg', '.jpeg', '.png', '.webp'].includes(extension);
+    // Browsers and Windows can send an empty or generic MIME type. Let the
+    // signature check below make the final decision for supported filenames.
+    callback(validMime || validExtension ? null : new Error('Only JPG, PNG and WebP images are allowed'), validMime || validExtension);
   }
 });
 
@@ -27,10 +31,9 @@ export function removeLocalUpload(image) {
 }
 
 export function validImageFile(file) {
-  const extension = path.extname(file.originalname).toLowerCase();
   const bytes = fs.readFileSync(file.path).subarray(0, 12);
-  const jpeg = (extension === '.jpg' || extension === '.jpeg') && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
-  const png = extension === '.png' && bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
-  const webp = extension === '.webp' && bytes.subarray(0, 4).toString() === 'RIFF' && bytes.subarray(8, 12).toString() === 'WEBP';
+  const jpeg = bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  const png = bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  const webp = bytes.subarray(0, 4).toString() === 'RIFF' && bytes.subarray(8, 12).toString() === 'WEBP';
   return jpeg || png || webp;
 }

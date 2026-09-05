@@ -8,21 +8,37 @@ const money = n => `₹${Number(n || 0).toLocaleString('en-IN')}`;
 const img = src => src || '/images/categories/crackers.svg';
 const isUploaded = src => String(src || '').startsWith('/uploads/');
 const blankAddress = { name: '', phone: '', email: '', address: '', city: '', state: 'Tamil Nadu', pin: '' };
+const views = new Set(['home', 'shop', 'offers', 'about', 'login', 'admin-login', 'account', 'orders', 'admin']);
+const viewFromLocation = () => { const value = window.location.hash.slice(1) || 'home'; return views.has(value) ? value : 'home'; };
 
 async function api(path, options = {}) {
   const token = localStorage.getItem('ak_token');
   const headers = { ...(options.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }), ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(options.headers || {}) };
   let r;
-  try {
-    r = await fetch(`${API}${path}`, { ...options, headers });
-  } catch (err) {
-    if (API_FALLBACK && API !== API_FALLBACK) r = await fetch(`${API_FALLBACK}${path}`, { ...options, headers });
-    else throw err;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      r = await fetch(`${API}${path}`, { ...options, headers });
+      if (r.ok || r.status < 500 || attempt === 2) break;
+    } catch (err) {
+      if (attempt === 2) {
+        if (!API_FALLBACK || API === API_FALLBACK) throw err;
+        r = null;
+        break;
+      }
+    }
+    await new Promise(resolve => setTimeout(resolve, 350));
   }
-  // Always retry the local Express API when the Vite/proxy route returns 404.
-  // This makes local development independent of a stale/missing Vite proxy.
-  if (r.status === 404 && API_FALLBACK && API !== API_FALLBACK) {
-    r = await fetch(`${API_FALLBACK}${path}`, { ...options, headers });
+  // Retry the local Express API when the Vite proxy is unavailable during startup.
+  if ((!r || r.status >= 500) && API_FALLBACK && API !== API_FALLBACK) {
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      try {
+        r = await fetch(`${API_FALLBACK}${path}`, { ...options, headers });
+        if (r.ok || r.status < 500 || attempt === 2) break;
+      } catch (err) {
+        if (attempt === 2) throw err;
+      }
+      await new Promise(resolve => setTimeout(resolve, 350));
+    }
   }
   const text = await r.text();
   let data = {};
@@ -34,15 +50,32 @@ async function api(path, options = {}) {
 function App() {
   const [products, setProducts] = useState([]), [config, setConfig] = useState({});
   const [cart, setCart] = useState(() => { try { return JSON.parse(localStorage.getItem('ak_cart') || '[]'); } catch { return []; } });
-  const [user, setUser] = useState(null), [view, setView] = useState('home'), [category, setCategory] = useState('All'), [search, setSearch] = useState('');
+  const [user, setUser] = useState(null), [view, setView] = useState(viewFromLocation), [category, setCategory] = useState('All'), [search, setSearch] = useState('');
   const [cartOpen, setCartOpen] = useState(false), [checkout, setCheckout] = useState(false), [checkoutStep, setCheckoutStep] = useState(1), [checkoutOrder, setCheckoutOrder] = useState(null);
   const [address, setAddress] = useState(blankAddress), [whatsappOptIn, setWhatsappOptIn] = useState(true), [orders, setOrders] = useState([]), [selectedOrder, setSelectedOrder] = useState(null);
   const [toast, setToast] = useState(''), [loading, setLoading] = useState(true);
 
   const notify = message => { setToast(message); window.clearTimeout(window.__akToast); window.__akToast = window.setTimeout(() => setToast(''), 3000); };
   const loadProducts = async () => { try { setProducts(await api('/products')); } catch (e) { notify(e.message); } };
-  const refreshUser = async () => { const t = localStorage.getItem('ak_token'); if (!t) return; try { setUser(await api('/me')); } catch { localStorage.removeItem('ak_token'); } };
-  useEffect(() => { (async () => { try { const [ps, cfg] = await Promise.all([api('/products'), api('/config')]); setProducts(ps); setConfig(cfg); await refreshUser(); } catch (e) { notify(e.message); } finally { setLoading(false); } })(); }, []);
+  const refreshUser = async () => { const t = localStorage.getItem('ak_token'); if (!t) return null; try { const current = await api('/me'); setUser(current); return current; } catch { localStorage.removeItem('ak_token'); return null; } };
+  useEffect(() => {
+    const handleNavigation = () => setView(viewFromLocation());
+    window.addEventListener('popstate', handleNavigation);
+    (async () => {
+      try {
+        const [ps, cfg] = await Promise.all([api('/products'), api('/config')]);
+        setProducts(ps); setConfig(cfg);
+        const restoredUser = await refreshUser();
+        const requestedView = viewFromLocation();
+        const protectedView = ['account', 'orders', 'admin'].includes(requestedView);
+        const allowedView = requestedView === 'admin' && restoredUser?.role !== 'admin' ? 'admin-login' : protectedView && !restoredUser ? 'login' : requestedView;
+        if (allowedView !== requestedView) window.history.replaceState({}, '', `#${allowedView}`);
+        setView(allowedView);
+      } catch (e) { notify(e.message); }
+      finally { setLoading(false); }
+    })();
+    return () => window.removeEventListener('popstate', handleNavigation);
+  }, []);
   useEffect(() => localStorage.setItem('ak_cart', JSON.stringify(cart)), [cart]);
 
   const categories = useMemo(() => ['All', ...new Set(products.map(p => p.category))], [products]);
@@ -51,7 +84,12 @@ function App() {
   const total = subtotal;
   const filtered = products.filter(p => (category === 'All' || p.category === category) && p.name.toLowerCase().includes(search.toLowerCase()));
 
-  function go(next) { setView(next); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  function go(next, bypassGuard = false) {
+    let target = views.has(next) ? next : 'home';
+    if (!bypassGuard && target === 'admin' && user?.role !== 'admin') target = 'admin-login';
+    if (!bypassGuard && ['account', 'orders'].includes(target) && !user) target = 'login';
+    setView(target); window.history.pushState({}, '', `#${target}`); window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   function addToCart(p) {
     if (!p.stock) return notify('This product is out of stock.');
     const current = cart.find(x => x.productId === p.id)?.qty || 0;
@@ -111,7 +149,7 @@ function App() {
     {view === 'offers' && <Offers products={products} add={addToCart} go={go} />}
     {view === 'about' && <About />}
     {view === 'login' && <Auth onSuccess={async u => { setUser(u); go('shop'); notify(`Welcome, ${u.name}.`); }} onAdminLogin={() => go('admin-login')} />}
-    {view === 'admin-login' && <AdminAuth onSuccess={async u => { if (!u) { go('home'); return; } setUser(u); go('admin'); notify(`Welcome, ${u.name}.`); }} />}
+    {view === 'admin-login' && <AdminAuth onSuccess={async u => { if (!u) { go('home'); return; } setUser(u); go('admin', true); notify(`Welcome, ${u.name}.`); }} />}
     {view === 'account' && user && <Account user={user} onSaved={u => setUser(u)} notify={notify} />}
     {view === 'orders' && <Orders orders={orders} open={openOrder} cancel={cancelOrder} />}
     {view === 'admin' && user?.role === 'admin' && <Admin notify={notify} reload={loadProducts} />}
@@ -123,7 +161,8 @@ function App() {
 }
 
 function Header({ user, cartCount, go, openOrders, logout, openCart }) {
-  return <header className="topbar"><button className="brand" onClick={() => go('home')}><span className="logoMark">AK</span><span><b>AK Crackers</b><small>2026 COLLECTION</small></span></button><nav><button onClick={() => go('shop')}>Shop</button><button onClick={() => go('offers')}>Offers</button><button onClick={() => go('about')}>About</button><button onClick={openOrders}>My Orders</button><button onClick={() => go('admin-login')}>Admin Login</button>{user?.role === 'admin' && <button onClick={() => go('admin')}>Admin</button>}</nav><div className="headActions">{user ? <button className="ghost" onClick={() => go('account')}>{user.name}</button> : <button className="ghost" onClick={() => go('login')}>Login</button>} {user && <button className="ghost hideMobile" onClick={logout}>Logout</button>}<button className="cartButton" onClick={openCart}>Cart <span>{cartCount}</span></button></div></header>;
+  const isAdmin = user?.role === 'admin';
+  return <header className="topbar"><button className="brand" onClick={() => go('home')}><span className="logoMark">AK</span><span><b>AK Crackers</b><small>2026 COLLECTION</small></span></button><nav><button onClick={() => go('shop')}>Shop</button><button onClick={() => go('offers')}>Offers</button><button onClick={() => go('about')}>About</button>{user && !isAdmin && <button onClick={openOrders}>My Orders</button>}{!user && <button onClick={() => go('admin-login')}>Admin Login</button>}{isAdmin && <button onClick={() => go('admin')}>Admin Dashboard</button>}</nav><div className="headActions">{user ? <button className="ghost" onClick={() => isAdmin ? go('admin') : go('account')}>{isAdmin ? 'Admin Account' : user.name}</button> : <button className="ghost" onClick={() => go('login')}>Login</button>} {user && <button className="ghost logoutButton" onClick={logout}>Logout</button>}<button className="cartButton" onClick={openCart}>Cart <span>{cartCount}</span></button></div></header>;
 }
 function Home({ go, products }) {
   const stockCount = products.filter(p => p.stock > 0).length;
@@ -167,7 +206,7 @@ function Admin({ notify, reload }) {
   const [tab, setTab] = useState('dashboard'), [stats, setStats] = useState(null), [products, setProducts] = useState([]), [orders, setOrders] = useState([]), [customers, setCustomers] = useState([]), [payments, setPayments] = useState([]), [notifications, setNotifications] = useState([]), [notificationConfig, setNotificationConfig] = useState(null), [edit, setEdit] = useState(null), [newProduct, setNewProduct] = useState(null);
   const load = async () => { try { const [s, p, o, c, pay, ns, nc] = await Promise.all([api('/admin/stats'), api('/admin/products'), api('/admin/orders'), api('/admin/customers'), api('/admin/payments'), api('/admin/notifications'), api('/admin/notification-config')]); setStats(s); setProducts(p); setOrders(o); setCustomers(c); setPayments(pay); setNotifications(ns); setNotificationConfig(nc); } catch (e) { notify(e.message); } };
   useEffect(() => { load(); }, []);
-  async function saveProduct(p, file) { try { const saved = p.id ? await api(`/admin/products/${p.id}`, { method: 'PUT', body: JSON.stringify(p) }) : await api('/admin/products', { method: 'POST', body: JSON.stringify(p) }); if (file) { const fd = new FormData(); fd.append('image', file); await api(`/admin/products/${saved.id}/image`, { method: 'POST', body: fd }); } setEdit(null); setNewProduct(null); await load(); await reload(); notify('Product saved.'); } catch (e) { notify(e.message); } }
+  async function saveProduct(p, file) { try { const saved = p.id ? await api(`/admin/products/${p.id}`, { method: 'PUT', body: JSON.stringify(p) }) : await api('/admin/products', { method: 'POST', body: JSON.stringify(p) }); if (file) { const fd = new FormData(); fd.append('image', file, file.name); await api(`/admin/products/${saved.id}/image`, { method: 'POST', body: fd }); } setEdit(null); setNewProduct(null); await load(); await reload(); notify('Product saved.'); } catch (e) { notify(e.message); } }
   async function removePhoto(id) { try { await api(`/admin/products/${id}/image`, { method: 'DELETE' }); await load(); await reload(); notify('Product photo removed.'); } catch (e) { notify(e.message); } }
   async function sendNotifications(id) { try { const r = await api(`/admin/orders/${id}/notify`, { method: 'POST' }); setOrders(os => os.map(x => x.id === id ? r.order : x)); notify('Bill notifications sent/reported.'); } catch (e) { notify(e.message); } }
   async function updateOrder(id, fields) { try { const o = await api(`/admin/orders/${id}`, { method: 'PUT', body: JSON.stringify(fields) }); setOrders(os => os.map(x => x.id === id ? o : x)); await load(); await reload(); notify('Order updated.'); } catch (e) { notify(e.message); } }

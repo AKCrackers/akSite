@@ -6,4 +6,3 @@ server/data.json
 server/uploads/*
 !server/uploads/.gitkeep
 *.log
-.env.example

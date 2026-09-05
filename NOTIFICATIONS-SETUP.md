@@ -7,7 +7,7 @@ When an order is successfully confirmed (online payment), the backend generates 
 - Customer WhatsApp (only when the customer opts in at checkout)
 - Admin WhatsApp
 
-A notification result is stored on the order and in `server/data.json` under `notifications`.
+A notification result is stored on the order and in MongoDB under the store document's `notifications` array.
 
 ## Email setup
 
