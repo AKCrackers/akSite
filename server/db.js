@@ -101,8 +101,17 @@ async function persist() {
 
 // Call this once at server startup, before app.listen().
 export async function connectDB() {
-  client = new MongoClient(MONGODB_URI, { serverSelectionTimeoutMS: 10000, tlsAllowInvalidCertificates: MONGODB_TLS_ALLOW_INVALID_CERTIFICATES });
-  await client.connect();
+  client = new MongoClient(MONGODB_URI, {
+    serverSelectionTimeoutMS: 10000,
+    connectTimeoutMS: 10000,
+    tls: true,
+    tlsAllowInvalidCertificates: MONGODB_TLS_ALLOW_INVALID_CERTIFICATES
+  });
+  try {
+    await client.connect();
+  } catch (error) {
+    throw new Error(`MongoDB connection failed. Check Render MONGODB_URI, Atlas network access, and server clock. ${error.message}`);
+  }
   const db = client.db(); // uses the database name embedded in MONGODB_URI
   collection = db.collection(COLLECTION_NAME);
 
