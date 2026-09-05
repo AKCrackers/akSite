@@ -109,23 +109,23 @@ export async function connectDB() {
   });
   try {
     await client.connect();
+    const db = client.db(); // uses the database name embedded in MONGODB_URI
+    collection = db.collection(COLLECTION_NAME);
+
+    const doc = await collection.findOne({ _id: DOC_ID });
+    if (!doc) {
+      cache = initialDB();
+      await persist();
+      console.log('MongoDB: initialized new store document.');
+    } else {
+      const { _id, ...data } = doc;
+      cache = data;
+      const catalogueChanged = reconcileCatalogue(cache);
+      const adminChanged = ensureAdminAccount(cache);
+      if (catalogueChanged || adminChanged) await persist();
+    }
   } catch (error) {
     throw new Error(`MongoDB connection failed. Check Render MONGODB_URI, Atlas network access, and server clock. ${error.message}`);
-  }
-  const db = client.db(); // uses the database name embedded in MONGODB_URI
-  collection = db.collection(COLLECTION_NAME);
-
-  const doc = await collection.findOne({ _id: DOC_ID });
-  if (!doc) {
-    cache = initialDB();
-    await persist();
-    console.log('MongoDB: initialized new store document.');
-  } else {
-    const { _id, ...data } = doc;
-    cache = data;
-    const catalogueChanged = reconcileCatalogue(cache);
-    const adminChanged = ensureAdminAccount(cache);
-    if (catalogueChanged || adminChanged) await persist();
   }
   console.log('Connected to MongoDB Atlas.');
 }
