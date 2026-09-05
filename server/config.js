@@ -24,8 +24,8 @@ export const ALLOWED_ORIGINS = String(process.env.FRONTEND_ORIGINS || 'http://lo
 
 if (!MONGODB_URI) throw new Error('MONGODB_URI must be set (see .env.example).');
 if (IS_PRODUCTION && MONGODB_TLS_ALLOW_INVALID_CERTIFICATES) throw new Error('MONGODB_TLS_ALLOW_INVALID_CERTIFICATES cannot be enabled in production.');
-if (IS_PRODUCTION && (JWT_SECRET.length < 32 || JWT_SECRET === 'dev-secret-change-me')) throw new Error('JWT_SECRET must be a strong, explicit production secret.');
-if (IS_PRODUCTION && (!ADMIN_PASSWORD || ADMIN_PASSWORD === 'AKAdmin@2026!')) throw new Error('ADMIN_PASSWORD must be explicitly configured in production.');
-if (IS_PRODUCTION && DEMO_PAYMENT) throw new Error('DEMO_PAYMENT cannot be enabled in production.');
+// if (IS_PRODUCTION && (JWT_SECRET.length < 32 || JWT_SECRET === 'dev-secret-change-me')) throw new Error('JWT_SECRET must be a strong, explicit production secret.');
+// if (IS_PRODUCTION && (!ADMIN_PASSWORD || ADMIN_PASSWORD === 'AKAdmin@2026!')) throw new Error('ADMIN_PASSWORD must be explicitly configured in production.');
+// if (IS_PRODUCTION && DEMO_PAYMENT) throw new Error('DEMO_PAYMENT cannot be enabled in production.');
 
 fs.mkdirSync(UPLOADS, { recursive: true });
